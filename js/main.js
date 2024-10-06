@@ -18,7 +18,7 @@ let planets = {
     rotationPeriod: 58.6,
     description: "Mercury is the smallest planet in our solar system and closest to the Sun.",
     mesh: null,
-    angle: 0 // زاوية المدار حول الشمس
+    angle: 0
   },
   venus: {
     name: "Venus",
@@ -151,12 +151,9 @@ function setSkyBox() {
   scene.add(skybox);
 }
 
-function loadPlanetTexture(texture, radius, widthSegments, heightSegments, meshType) {
-  const geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
-  const loader = new THREE.TextureLoader();
-  const planetTexture = loader.load(texture);
-  const material = meshType === 'standard' ? new THREE.MeshStandardMaterial({ map: planetTexture }) : new THREE.MeshBasicMaterial({ map: planetTexture });
-
+function loadPlanetTexture(texture, radius) {
+  const geometry = new THREE.SphereGeometry(radius, 32, 32);
+  const material = new THREE.MeshStandardMaterial({ map: new THREE.TextureLoader().load(texture) });
   return new THREE.Mesh(geometry, material);
 }
 
@@ -174,37 +171,50 @@ function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-  setSkyBox();
-
-  planet_sun = loadPlanetTexture(sun.texture, sun.radius, 100, 100, 'basic');
-  scene.add(planet_sun);
-
-  // تحميل الكواكب وإضافتها إلى المشهد
-  Object.keys(planets).forEach(key => {
-    let planetData = planets[key];
-    let planet = loadPlanetTexture(planetData.texture, planetData.radius, 100, 100, 'standard');
-    planets[key].mesh = planet; // تخزين الكائن في القائمة لاستخدامه لاحقًا
-    scene.add(planet);
-  });
-
-  const sunLight = new THREE.PointLight(0xffffff, 1, 0);
-  sunLight.position.copy(planet_sun.position);
-  scene.add(sunLight);
-
-  // إضافة المدارات
-  Object.keys(planets).forEach(key => {
-    createRing(planets[key].orbit);
-  });
-
   renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
-  renderer.domElement.id = "c";
-  controls = new OrbitControls(camera, renderer.domElement);
-  controls.minDistance = 12;
-  controls.maxDistance = 1000;
 
-  camera.position.z = 100;
+  // إعداد عناصر التحكم
+  controls = new OrbitControls(camera, renderer.domElement);
+  camera.position.z = 50; // تعيين موضع الكاميرا
+
+  // إعداد واجهة المستخدم
+  const gui = new dat.GUI();
+  const params = {
+    speed: 0.01, // السرعة العامة
+    zoom: 12
+  };
+  gui.add(params, 'speed', 0, 10).onChange((value) => {
+    Object.values(planets).forEach(planet => {
+      planet.speed = value; // تعيين السرعة لكل كوكب
+    });
+  });
+  gui.add(params, 'zoom', 2, 100).onChange((value) => {
+    camera.position.z = value; // تعيين موضع الكاميرا
+  });
+
+  setSkyBox();
+
+  // Load sun
+  planet_sun = loadPlanetTexture(sun.texture, sun.radius);
+  scene.add(planet_sun);
+
+  // Load planets
+  Object.keys(planets).forEach(key => {
+    let planetData = planets[key];
+    planetData.mesh = loadPlanetTexture(planetData.texture, planetData.radius);
+    scene.add(planetData.mesh);
+    createRing(planetData.orbit); // Add rings for orbits
+  });
+
+  // Add lights
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // Soft white light
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(0, 1, 1).normalize();
+  scene.add(directionalLight);
 
   setupPlanetButtons();
 }
@@ -222,32 +232,42 @@ function setupPlanetButtons() {
 }
 
 function displayPlanetInfo(planet) {
-  alert(`
-    Name: ${planet.name}
-    Diameter: ${planet.diameter || 'N/A'} km
-    Distance from Sun: ${planet.distanceFromSun || 'N/A'} million km
-    Orbital Period: ${planet.orbitalPeriod || 'N/A'} days
-    Rotation Period: ${planet.rotationPeriod || 'N/A'} days
-    Description: ${planet.description}
-  `);
+  const infoDiv = document.getElementById('planetInfo');
+  infoDiv.innerHTML = `
+      <strong>Name:</strong> ${planet.name}<br>
+      <strong>Diameter:</strong> ${planet.diameter || 'N/A'} km<br>
+      <strong>Distance from Sun:</strong> ${planet.distanceFromSun || 'N/A'} million km<br>
+      <strong>Orbital Period:</strong> ${planet.orbitalPeriod || 'N/A'} days<br>
+      <strong>Rotation Period:</strong> ${planet.rotationPeriod || 'N/A'} days<br>
+      <strong>Description:</strong> ${planet.description}
+  `;
 }
+
 
 function animate() {
   requestAnimationFrame(animate);
-
-  Object.keys(planets).forEach(key => {
-    let planetData = planets[key];
-    planetData.angle += planetData.speed * 0.01; // زيادة زاوية المدار
-    planetData.mesh.position.set(
-      Math.cos(planetData.angle) * planetData.orbit,
-      0,
-      Math.sin(planetData.angle) * planetData.orbit
-    );
-    planetData.mesh.rotation.y += 0.01;
-  });
-
+  updatePlanetPositions();
   renderer.render(scene, camera);
 }
+
+function updatePlanetPositions() {
+  const delta = 0.01; // Adjust this for more visible motion
+  Object.keys(planets).forEach(key => {
+    let planetData = planets[key];
+    planetData.angle += planetData.speed * delta;
+    planetData.mesh.position.x = Math.cos(planetData.angle) * planetData.orbit;
+    planetData.mesh.position.z = Math.sin(planetData.angle) * planetData.orbit;
+
+    // Optional: Ensure planets are always facing the center
+    planetData.mesh.lookAt(0, 0, 0);
+  });
+}
+
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
 
 init();
 animate();
