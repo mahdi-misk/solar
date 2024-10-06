@@ -127,6 +127,52 @@ let sun = {
   description: "The Sun is a star at the center of the solar system, and its gravity holds the planets in orbit around it."
 };
 
+// Create a modal element in the HTML dynamically
+const modal = document.createElement('div');
+modal.id = 'planetModal';
+modal.style.display = 'none';
+modal.style.position = 'fixed';
+modal.style.left = '75%';
+modal.style.top = '46%';
+modal.style.transform = 'translate(-50%, -50%)';
+modal.style.backgroundColor = 'blur';
+modal.style.padding = '20px';
+modal.style.borderRadius = '10px';
+modal.style.boxShadow = '0px 0px 15px rgba(0, 0, 0, 0.3)';
+modal.style.zIndex = '1000'; // Ensure modal appears above other elements
+document.body.appendChild(modal);
+
+// Create a function to display planet info in the modal
+function displayPlanetInfo(planet) {
+    modal.innerHTML = `
+        <h2>${planet.name}</h2>
+        <p>Diameter: ${planet.diameter || 'N/A'} km</p>
+        <p>Distance from Sun: ${planet.distanceFromSun || 'N/A'} million km</p>
+        <p>Orbital Period: ${planet.orbitalPeriod || 'N/A'} days</p>
+        <p>Rotation Period: ${planet.rotationPeriod || 'N/A'} days</p>
+        <p>Description: ${planet.description}</p>
+        <button id="wikiButton" class="modal-button">Learn More on Wikipedia</button>
+        <button id="nasaButton" class="modal-button">Learn More on NASA</button>
+        <button id="closeModal" class="modal-button" style="background-color: red; color: white;">Close</button>
+    `;
+
+    // Add event listeners to the buttons to redirect to Wikipedia and NASA pages
+    document.getElementById('wikiButton').addEventListener('click', () => {
+        window.open(`https://en.wikipedia.org/wiki/${planet.name}`, '_blank');
+    });
+
+    document.getElementById('nasaButton').addEventListener('click', () => {
+        window.open(`https://solarsystem.nasa.gov/planets/${planet.name.toLowerCase()}/overview/`, '_blank');
+    });
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Show the modal
+    modal.style.display = 'block';
+}
+
 function createMaterialArray() {
   const skyboxImagepaths = [
     '../img/skybox/space_ft.png',
@@ -219,17 +265,6 @@ function setupPlanetButtons() {
   document.getElementById('uranusButton').addEventListener('click', () => displayPlanetInfo(planets.uranus));
   document.getElementById('neptuneButton').addEventListener('click', () => displayPlanetInfo(planets.neptune));
   document.getElementById('sunButton').addEventListener('click', () => displayPlanetInfo(sun));
-}
-
-function displayPlanetInfo(planet) {
-  alert(`
-    Name: ${planet.name}
-    Diameter: ${planet.diameter || 'N/A'} km
-    Distance from Sun: ${planet.distanceFromSun || 'N/A'} million km
-    Orbital Period: ${planet.orbitalPeriod || 'N/A'} days
-    Rotation Period: ${planet.rotationPeriod || 'N/A'} days
-    Description: ${planet.description}
-  `);
 }
 
 function animate() {
