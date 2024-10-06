@@ -48,11 +48,7 @@ body {
 }
 
 .btn {
-<<<<<<< HEAD
   background: #303030;
-=======
-  background: white;
->>>>>>> db072a769d8e1d2223e77ab53a0ba3af36b68c92
   color: white;
   font-weight: bold;
   font-size: 15px;
@@ -90,103 +86,3 @@ body {
   top: 20px;
   right: 5px;
 }
-<<<<<<< HEAD
-=======
-.btn-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  position: fixed;
-  bottom: 5px;
-  left: 2%;
-  width: 100%;
-}
-
-.btn {
-  background: rgb(68, 127, 138);
-  color: black;
-  opacity: 50%;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 15%;
-  width: 75px;
-  height: 50px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-/* Modal container styling */
-#planetModal {
-    display: none;
-    position: fixed;
-    right: 20px; /* Align modal to the right */
-    top: 50%;
-    transform: translateY(-50%); /* Center vertically */
-    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white for a glass effect */
-    color: #ffffff; /* White text for better contrast */
-    padding: 30px;
-    border-radius: 15px; /* Smooth rounded corners */
-    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4); /* Soft shadow for depth */
-    z-index: 1000;
-    width: 300px; /* Adjust width as needed */
-    text-align: center;
-    backdrop-filter: blur(15px); /* Glass effect */
-}
-
-/* Modal title styling */
-#planetModal h2 {
-    color: #f39c12; /* Golden yellow for the title */
-    font-size: 24px; /* Adjusted font size for better fit */
-    margin-bottom: 20px;
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase; /* Makes the title stand out */
-}
-
-/* Modal description paragraph styling */
-#planetModal p {
-    color: #bdc3c7; /* Light gray text */
-    font-size: 16px; /* Adjusted font size */
-    margin-bottom: 15px;
-    font-family: 'Verdana', sans-serif;
-    line-height: 1.6;
-}
-
-/* Button styling (general styles for all buttons) */
-#planetModal .modal-button {
-    padding: 10px 15px; /* Adjusted padding */
-    margin: 10px 5px;
-    border: none;
-    font-size: 14px; /* Adjusted font size */
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-}
-
-/* Wikipedia button (blue) */
-#planetModal #wikiButton {
-    background-color: #3498db; /* Light blue */
-}
-
-#planetModal #wikiButton:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-}
-
-/* NASA button (orange) */
-#planetModal #nasaButton {
-    background-color: #e67e22; /* Light orange */
-}
-
-#planetModal #nasaButton:hover {
-    background-color: #d35400; /* Darker orange on hover */
-}
-
-/* Close button (red) */
-#planetModal #closeModal {
-    background-color: #e74c3c; /* Bright red */
-}
-
-#planetModal #closeModal:hover {
-    background-color: #c0392b; /* Darker red on hover */
-}
->>>>>>> db072a769d8e1d2223e77ab53a0ba3af36b68c92
