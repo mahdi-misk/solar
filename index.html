@@ -10,8 +10,48 @@
   <div id="info" style="position: absolute; left: 10px; top: 10px; color: white; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 5px;">
     <h3>Planet Information</h3>
     <p id="planetInfo">Select a planet to display information</p>
-</div>
-<div id="planetInfo"></div>
+  </div>
+  <div id="planetInfo"></div>
+
+  <!-- جدول المعلومات -->
+  <div class="table-container" style="position: absolute; left: -9px; bottom: 42px; color: white;">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Object Name</th>
+          <th>Epoch (TDB)</th>
+          <th>Eccentricity (e)</th>
+          <th>Inclination (i_deg)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P/2004 R1 (McNaught)</td>
+          <td>54629</td>
+          <td>0.68253</td>
+          <td>4.89</td>
+        </tr>
+        <tr>
+          <td>2P/Encke</td>
+          <td>56870</td>
+          <td>0.84827</td>
+          <td>11.78</td>
+        </tr>
+        <tr>
+          <td>1P/Halley</td>
+          <td>49400</td>
+          <td>0.96714</td>
+          <td>162.26</td>
+        </tr>
+        <tr>
+          <td>P/2008 S1 (Catalina-McNaught)</td>
+          <td>55101</td>
+          <td>0.66631</td>
+          <td>15.10</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <div class="btn-wrapper">
     <button id="mercuryButton" class="btn">Mercury</button>
@@ -25,6 +65,6 @@
     <button id="sunButton" class="btn">Sun</button>
   </div>
   
-    <script src="js/main.js" type="module"></script>
+  <script src="js/main.js" type="module"></script>
 </body>
 </html>

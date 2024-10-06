@@ -87,6 +87,7 @@ body {
   top: 20px;
   right: 5px;
 }
+
 .info-button {
   background-color: #a5a5a5;
   border: none;
@@ -103,5 +104,42 @@ body {
 }
  
 .info-button:hover {
-  background-color: #45a049; /* اللون عند تمرير الفأرة */
+  background-color: #45a049; /* Color on hover */
+}
+
+/* Styles for the table */
+.table-container {
+  position: absolute;
+  left: -9px;
+  bottom: 42px;
+  color: white;
+}
+
+.styled-table {
+  width: 300px;
+  border-collapse: collapse;
+  margin: 31px 38px;
+  background-color: rgba(50, 50, 50, 0.8);
+}
+
+.styled-table th, .styled-table td {
+  padding: 10px; /* Reduced padding for a smaller table */
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: rgba(0, 128, 128, 0.8); /* Header color */
+  color: white; /* Header text color */
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: rgba(100, 100, 100, 0.5); /* Even row color */
+}
+
+.styled-table tr:nth-child(odd) {
+  background-color: rgba(150, 150, 150, 0.5); /* Odd row color */
+}
+
+.styled-table tr:hover {
+  background-color: rgba(0, 255, 255, 0.5); /* Row hover color */
 }
