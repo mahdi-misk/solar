@@ -6,6 +6,7 @@
 body {
   margin: 0;
   overflow: hidden;
+  background-color: black;
 }
 
 #planet-buttons {
@@ -85,4 +86,22 @@ body {
   position: fixed;
   top: 20px;
   right: 5px;
+}
+.info-button {
+  background-color: #a5a5a5;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 11px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+ 
+.info-button:hover {
+  background-color: #45a049; /* اللون عند تمرير الفأرة */
 }

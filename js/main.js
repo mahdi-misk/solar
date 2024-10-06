@@ -230,7 +230,6 @@ function setupPlanetButtons() {
   document.getElementById('neptuneButton').addEventListener('click', () => displayPlanetInfo(planets.neptune));
   document.getElementById('sunButton').addEventListener('click', () => displayPlanetInfo(sun));
 }
-
 function displayPlanetInfo(planet) {
   const infoDiv = document.getElementById('planetInfo');
   infoDiv.innerHTML = `
@@ -239,10 +238,21 @@ function displayPlanetInfo(planet) {
       <strong>Distance from Sun:</strong> ${planet.distanceFromSun || 'N/A'} million km<br>
       <strong>Orbital Period:</strong> ${planet.orbitalPeriod || 'N/A'} days<br>
       <strong>Rotation Period:</strong> ${planet.rotationPeriod || 'N/A'} days<br>
-      <strong>Description:</strong> ${planet.description}
+      <strong>Description:</strong> ${planet.description}<br><br>
+      <button id="sendButton1" class="info-button">NASA Info</button>
+      <button id="sendButton2" class="info-button">Wikipedia Info</button>
   `;
-}
 
+  // إضافة وظيفة الزر لفتح رابط ناسا
+  document.getElementById('sendButton1').addEventListener('click', function() {
+      window.open(`https://solarsystem.nasa.gov/planets/${planet.name.toLowerCase()}/overview/`, '_blank');
+  });
+
+  // إضافة وظيفة الزر لفتح رابط ويكيبيديا
+  document.getElementById('sendButton2').addEventListener('click', function() {
+      window.open(`https://en.wikipedia.org/wiki/${planet.name}`, '_blank');
+  });
+}
 
 function animate() {
   requestAnimationFrame(animate);
