@@ -8,7 +8,7 @@ let planet_sun;
 let planets = {
   mercury: {
     name: "Mercury",
-    texture: "../img/mercury_hd.jpg",
+    texture: "mg/mercury_hd.jpg",
     radius: 2,
     orbit: 50,
     speed: 0.24,
