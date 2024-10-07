@@ -8,7 +8,7 @@ let planet_sun;
 let planets = {
   mercury: {
     name: "Mercury",
-    texture: "img/mercury_hd.jpg",
+    texture: "image/mercury_hd.jpg",
     radius: 2,
     orbit: 50,
     speed: 0.24,
@@ -22,7 +22,7 @@ let planets = {
   },
   venus: {
     name: "Venus",
-    texture: "../img/venus_hd.jpg",
+    texture: "image/venus_hd.jpg",
     radius: 3,
     orbit: 60,
     speed: 0.615,
@@ -36,7 +36,7 @@ let planets = {
   },
   earth: {
     name: "Earth",
-    texture: "../img/earth_hd.jpg",
+    texture: "image/earth_hd.jpg",
     radius: 4,
     orbit: 70,
     speed: 1,
@@ -50,7 +50,7 @@ let planets = {
   },
   mars: {
     name: "Mars",
-    texture: "../img/mars_hd.jpg",
+    texture: "img/mars_hd.jpg",
     radius: 3.5,
     orbit: 80,
     speed: 0.524,
@@ -64,7 +64,7 @@ let planets = {
   },
   jupiter: {
     name: "Jupiter",
-    texture: "../img/jupiter_hd.jpg",
+    texture: "image/jupiter_hd.jpg",
     radius: 10,
     orbit: 100,
     speed: 0.084,
@@ -78,7 +78,7 @@ let planets = {
   },
   saturn: {
     name: "Saturn",
-    texture: "../img/saturn_hd.jpg",
+    texture: "image/saturn_hd.jpg",
     radius: 8,
     orbit: 120,
     speed: 0.034,
@@ -92,7 +92,7 @@ let planets = {
   },
   uranus: {
     name: "Uranus",
-    texture: "../img/uranus_hd.jpg",
+    texture: "image/uranus_hd.jpg",
     radius: 6,
     orbit: 140,
     speed: 0.012,
@@ -106,7 +106,7 @@ let planets = {
   },
   neptune: {
     name: "Neptune",
-    texture: "../img/neptune_hd.jpg",
+    texture: "image/neptune_hd.jpg",
     radius: 5,
     orbit: 160,
     speed: 0.006,
@@ -122,7 +122,7 @@ let planets = {
 
 let sun = {
   name: "Sun",
-  texture: "../img/sun_hd.jpg",
+  texture: "image/sun_hd.jpg",
   radius: 20,
   description: "The Sun is a star at the center of the solar system, and its gravity holds the planets in orbit around it."
 };
