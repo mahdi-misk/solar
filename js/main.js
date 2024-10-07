@@ -50,7 +50,7 @@ let planets = {
   },
   mars: {
     name: "Mars",
-    texture: "img/mars_hd.jpg",
+    texture: "image/mars_hd.jpg",
     radius: 3.5,
     orbit: 80,
     speed: 0.524,
